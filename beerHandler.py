@@ -81,15 +81,14 @@ def typeStuff():
 
 	nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
 
-	print(nameCount)
+	#print(nameCount)
 
-	k = 0
 	q = False
-	for count in wordCount:
-		if count > 0:
-			print(names[k])
+	for item in nameCount:
+		if item[0] != 0:		#if count isn't zero
+			print(item[1])		#print the name
 			q = True
-		k += 1
+		else: break
 
 	if not q: print("no matches, sorry")
 
