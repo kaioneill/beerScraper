@@ -72,16 +72,16 @@ def typeStuff():
 
 
 
-	nameCount = [[0,'']] * len(names)
+	nameCount = []
 
 	for i in range(len(names)-1):
-		nameCount[i][0] = wordCount[i]
-		nameCount[i][1] = names[i]
+		temp = [wordCount[i], names[i]]
+		nameCount.append(temp)
 
-	#print(wordCount)
-	#print(names)
+
+	nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
+
 	print(nameCount)
-
 
 	k = 0
 	q = False
