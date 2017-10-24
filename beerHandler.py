@@ -27,7 +27,7 @@ descs = records
 #descs = ['this is coffee, it is good','this is not']
 
 
-for j in range(0,len(descs)-1):
+for j in range(len(descs)-1):
 	descs[j] = descs[j].lower()
 	descs[j] = descs[j].replace(',','')
 	descs[j] = descs[j].replace('.','')
@@ -53,15 +53,18 @@ def typeStuff():
 
 
 
-	for w in range(0,len(descs)-1):
-		for i in range(0,len(userWords)-1):
+	for w in range(len(descs)-1):
+		for userWord in range(len(userWords)-1):
 			for beerWord in userWords:
 				if userWord == beerWord:
 					wordCount[w] += 1
 
 
 
+
 	print('\n')
+
+	print(len(descs))
 
 
 	names = scrape.getNames()
@@ -73,14 +76,14 @@ def typeStuff():
 	# names = [x[1] for x in sorted_together]
 
 	k = 0
-	q = 0
+	q = False
 	for count in wordCount:
 		if count > 0:
 			print(names[k])
-			q +=1
+			q = True
 		k += 1
 
-	if q == 0: print("no matches, sorry")
+	if not q: print("no matches, sorry")
 
 	#index, value = max(enumerate(wordCount), key=operator.itemgetter(1))
 
