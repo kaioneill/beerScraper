@@ -3,6 +3,7 @@
 import beerScrape as scrape
 import operator
 from multiprocessing import Pool
+from operator import itemgetter
 
 # from multiprocessing import Pool
 
@@ -52,28 +53,35 @@ def typeStuff():
 	#print('\n')
 
 
-
-	for w in range(len(descs)-1):
-		for userWord in range(len(userWords)-1):
-			for beerWord in userWords:
+	w = 0
+	for desc in descs:
+		for userWord in userWords:
+			for beerWord in desc:
 				if userWord == beerWord:
 					wordCount[w] += 1
+		w += 1
 
 
 
 
 	print('\n')
 
-	print(len(descs))
 
 
 	names = scrape.getNames()
 
-	# together = zip(nums, wordCount)
-	# sorted_together =  sorted(together)
 
-	# wordCount = [x[0] for x in sorted_together]
-	# names = [x[1] for x in sorted_together]
+
+	nameCount = [[0,'']] * len(names)
+
+	for i in range(len(names)-1):
+		nameCount[i][0] = wordCount[i]
+		nameCount[i][1] = names[i]
+
+	#print(wordCount)
+	#print(names)
+	print(nameCount)
+
 
 	k = 0
 	q = False
