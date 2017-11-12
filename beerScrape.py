@@ -7,7 +7,7 @@ from multiprocessing import Pool
 
 beerLinks = []
 
-url = "https://www.ratebeer.com/top"	
+url = "https://www.ratebeer.com/top"
 
 def getMainSoup(url):
 	req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -15,27 +15,27 @@ def getMainSoup(url):
 	pageSoup = soup(html, "lxml")
 
 
-	return pageSoup	
+	return pageSoup
 
 
 def getSoup(url):
 	req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 	html = urllib.request.urlopen(req).read()
 	pageSoup = soup(html, "lxml")
-	
+
 	beerSoup = pageSoup
 	beerLines = beerSoup.findAll("span", {"id":"_description3"})
-	description = beerLines[0].text.strip()	
+	description = beerLines[0].text.strip()
 	# descriptions.append(description)
 
-	return ','.join(description)	
+	return ','.join(description)
 
 
 
 
-top50Soup = getMainSoup(url)	
+top50Soup = getMainSoup(url)
 lines = top50Soup.findAll("tr")
-lines.pop(0)	
+lines.pop(0)
 
 
 
@@ -50,7 +50,7 @@ def getDescriptions():
 
 
 	for line in lines:
-	
+
 		beerName = line.a.text
 		beerType = line.span.text
 		percentContainer = line.findAll("td",{"class":"centered"})
@@ -61,11 +61,8 @@ def getDescriptions():
 		# print("abv: " + percent)
 		# print("rating: " + rating)
 		beerUrl = url.replace('/top','') + line.a.get('href')
-		beerLinks.append(beerUrl)			
-		# beerSoup = getSoup(beerUrl)	
-		# beerLines = beerSoup.findAll("span", {"id":"_description3"})
-		# description = beerLines[0].text.strip()	
-		# descriptions.append(description)
+		beerLinks.append(beerUrl)
+	
 
 
 	return beerLinks
@@ -77,13 +74,13 @@ def getNames():
 	names = []
 
 	for line in lines:
-		
+
 		beerName = line.a.text
 		beerType = line.span.text
 		percentContainer = line.findAll("td",{"class":"centered"})
 		percent = percentContainer[1].text
 		rating = percentContainer[2].text
-	
+
 
 		names.append(beerName)
 
@@ -96,5 +93,3 @@ def getNames():
 
 # if len(records) > 0:
 #     .join(records)
-
-

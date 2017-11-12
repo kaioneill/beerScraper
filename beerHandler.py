@@ -5,10 +5,7 @@ import operator
 from multiprocessing import Pool
 from operator import itemgetter
 
-# from multiprocessing import Pool
 
-# p = Pool(10)
-# records = p.map(parse, getDescriptions())
 
 url = "https://www.ratebeer.com/top"
 
@@ -36,9 +33,7 @@ for j in range(len(descs)-1):
 
 
 
-#descs[0] = descs[0].split(' ')
 
-#print(descs[0][0])
 
 wordCount = [0] * len(descs)
 
@@ -92,7 +87,6 @@ def typeStuff():
 
 	if not q: print("no matches, sorry")
 
-	#index, value = max(enumerate(wordCount), key=operator.itemgetter(1))
 
 	print('\n')
 	#print(wordCount)
