@@ -1,12 +1,10 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
+import beerScrape as scrape
+from operator import itemgetter
 
-# corpus = ['This is the first document.',
-#   'This is the second second document.',
-#   'And the third one.',
-#   'Is this the first document?',
-#   ]
+#names = scrape.getNames()
 
-
+names = ['beer1', 'beer2']
 
 
 query = 'I like coffee and sour'
@@ -28,6 +26,22 @@ vals = tfidf.toarray()
 sim = tfidf * tfidf.T
 matches = sim.toarray()[0]
 
+matches = matches[1:]
+
 print(matches)
 
-#print(vectorizer.vocabulary_)
+
+
+
+nameCount = []
+
+for i in range(len(names)-1):
+    temp = [matches[i], names[i]]
+    nameCount.append(temp)
+
+
+nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
+
+
+
+print(nameCount)
