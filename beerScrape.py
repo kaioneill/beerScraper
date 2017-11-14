@@ -54,15 +54,15 @@ def getDescriptions():
 		beerName = line.a.text
 		beerType = line.span.text
 		percentContainer = line.findAll("td",{"class":"centered"})
-		percent = percentContainer[1].text
-		rating = percentContainer[2].text
+		#percent = percentContainer[1].text
+		#rating = percentContainer[2].text
 		# print("name: " + beerName)
 		# print("type: " + beerType)
 		# print("abv: " + percent)
 		# print("rating: " + rating)
 		beerUrl = url.replace('/top','') + line.a.get('href')
 		beerLinks.append(beerUrl)
-	
+
 
 
 	return beerLinks
@@ -78,8 +78,8 @@ def getNames():
 		beerName = line.a.text
 		beerType = line.span.text
 		percentContainer = line.findAll("td",{"class":"centered"})
-		percent = percentContainer[1].text
-		rating = percentContainer[2].text
+		#percent = percentContainer[1].text
+		#rating = percentContainer[2].text
 
 
 		names.append(beerName)

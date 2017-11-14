@@ -25,7 +25,7 @@ descs = records
 #descs = ['this is coffee, it is good','this is not']
 
 
-for j in range(len(descs)-1):
+for j in range(len(descs)):
 	descs[j] = descs[j].lower()
 	descs[j] = descs[j].replace(',','')
 	descs[j] = descs[j].replace('.','')

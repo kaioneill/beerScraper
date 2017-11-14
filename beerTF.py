@@ -2,16 +2,22 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import beerScrape as scrape
 from operator import itemgetter
 
-#names = scrape.getNames()
 
-names = ['beer1', 'beer2']
+
+
+url = "https://www.ratebeer.com/top"
+scrape.getMainSoup(url)
+beer = scrape.getDescriptions()
+names = scrape.getNames()
+
+#names = ['beer1', 'beer2']
 
 
 query = 'I like coffee and sour'
 
 arr = [query]
 
-beer = ['This beer is the real McCoy. Barrel aged and crammed with coffee, none other will stand in it’s way. Sought out for being delicious, it is notoriously difficult to track down. If you can find one, shoot to kill, because it is definitely wanted... dead or alive.', 'Pliny the Younger was Pliny the Elder’s nephew, in the case of this beer, the "Younger" is a triple IPA. Pliny the Younger is hopped three times more than our standard IPA, and is dry hopped four different times.']
+#beer = ['Pliny the Younger was Pliny the Elder’s nephew, in the case of this beer, the "Younger" is a triple IPA. Pliny the Younger is hopped three times more than our standard IPA, and is dry hopped four different times.', 'This beer is the real McCoy. Barrel aged and crammed with coffee, none other will stand in it’s way. Sought out for being delicious, it is notoriously difficult to track down. If you can find one, shoot to kill, because it is definitely wanted... dead or alive.']
 
 
 for i in beer:
@@ -35,7 +41,7 @@ print(matches)
 
 nameCount = []
 
-for i in range(len(names)-1):
+for i in range(len(names)):
     temp = [matches[i], names[i]]
     nameCount.append(temp)
 
