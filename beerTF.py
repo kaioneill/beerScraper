@@ -1,29 +1,49 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import beerScrape as scrape
 from operator import itemgetter
+from multiprocessing import Pool
 
 
 
 
 url = "https://www.ratebeer.com/top"
+
+print('\n')
+print("loading beer info...")
+print('\n')
+
 scrape.getMainSoup(url)
-beer = scrape.getDescriptions()
+scrape.getDescriptions()
 names = scrape.getNames()
+
+
+
+
+with Pool(10) as p:
+	records = p.map(scrape.getSoup, scrape.beerLinks)
+
+descs = records
+
+# for j in range(len(descs)):
+# 	descs[j] = descs[j].lower()
+# 	descs[j] = descs[j].replace(',','')
+# 	descs[j] = descs[j].replace('.','')
 
 #names = ['beer1', 'beer2']
 
 
-query = 'I like coffee and sour'
+query = input('what qualities do you look for in a beer?\n')
+print('\n')
 
 arr = [query]
 
 #beer = ['Pliny the Younger was Pliny the Elder’s nephew, in the case of this beer, the "Younger" is a triple IPA. Pliny the Younger is hopped three times more than our standard IPA, and is dry hopped four different times.', 'This beer is the real McCoy. Barrel aged and crammed with coffee, none other will stand in it’s way. Sought out for being delicious, it is notoriously difficult to track down. If you can find one, shoot to kill, because it is definitely wanted... dead or alive.']
 
 
-for i in beer:
+for i in descs:
     arr.append(i)
 
-#print(arr)
+    #print(arr)
 
 vectorizer = TfidfVectorizer()
 tfidf = vectorizer.fit_transform(arr)
@@ -48,6 +68,18 @@ for i in range(len(names)):
 
 nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
 
+#print(nameCount)
 
 
-print(nameCount)
+
+q = False
+for item in nameCount:
+    if item[0] != 0:		#if count isn't zero
+        print(item[1])		#print the name
+        q = True
+    else: break
+
+if not q: print("no matches, sorry")
+
+
+print('\n')

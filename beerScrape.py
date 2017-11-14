@@ -28,7 +28,7 @@ def getSoup(url):
 	description = beerLines[0].text.strip()
 	# descriptions.append(description)
 
-	return ','.join(description)
+	return ''.join(description)
 
 
 
