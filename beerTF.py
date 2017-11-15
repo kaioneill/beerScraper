@@ -24,20 +24,21 @@ with Pool(10) as p:
 
 descs = records
 
-# for j in range(len(descs)):
-# 	descs[j] = descs[j].lower()
-# 	descs[j] = descs[j].replace(',','')
-# 	descs[j] = descs[j].replace('.','')
+for j in range(len(descs)):
+	descs[j] = descs[j].lower()
+	descs[j] = descs[j].replace(',','')
+	descs[j] = descs[j].replace('.','')
 
 #names = ['beer1', 'beer2']
 
-
-query = input('what qualities do you look for in a beer?\n')
+query = 'i like coffee and sweet beer'
+#query = input('what qualities do you look for in a beer?\n')
 print('\n')
 
-arr = [query]
+#arr = [query]
+arr = []
 
-#beer = ['Pliny the Younger was Pliny the Elder’s nephew, in the case of this beer, the "Younger" is a triple IPA. Pliny the Younger is hopped three times more than our standard IPA, and is dry hopped four different times.', 'This beer is the real McCoy. Barrel aged and crammed with coffee, none other will stand in it’s way. Sought out for being delicious, it is notoriously difficult to track down. If you can find one, shoot to kill, because it is definitely wanted... dead or alive.']
+#descs = ['Pliny the Younger was Pliny the Elder’s nephew, in the case of this beer, the "Younger" is a triple IPA. Pliny the Younger is hopped three times more than our standard IPA, and is dry hopped four different times.', 'This beer is the real McCoy. Barrel aged and crammed with coffee, none other will stand in it’s way. Sought out for being delicious, it is notoriously difficult to track down. If you can find one, shoot to kill, because it is definitely wanted... dead or alive.']
 
 
 for i in descs:
@@ -45,41 +46,46 @@ for i in descs:
 
     #print(arr)
 
-vectorizer = TfidfVectorizer()
+
+vectorizer = TfidfVectorizer(analyzer='word')
 tfidf = vectorizer.fit_transform(arr)
-vals = tfidf.toarray()
+
+print(vectorizer.transform([query]))
+
+
+
 
 sim = tfidf * tfidf.T
 matches = sim.toarray()[0]
 
-matches = matches[1:]
+#matches = matches[1:]
 
-print(matches)
-
-
-
-
-nameCount = []
-
-for i in range(len(names)):
-    temp = [matches[i], names[i]]
-    nameCount.append(temp)
-
-
-nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
-
-#print(nameCount)
+#print(matches)
 
 
 
-q = False
-for item in nameCount:
-    if item[0] != 0:		#if count isn't zero
-        print(item[1])		#print the name
-        q = True
-    else: break
 
-if not q: print("no matches, sorry")
+# nameCount = []
+#
+# for i in range(len(names)):
+#     temp = [matches[i], names[i]]
+#     nameCount.append(temp)
+#
+#
+# nameCount = sorted(nameCount, key=itemgetter(0), reverse=True)
+#
+# #print(nameCount)
+#
+#
+#
+# q = False
+# for item in nameCount:
+#     if item[0] != 0:
+#         print(item[1])
+#         q = True
+#     else: break
+#
+# if not q: print("no matches, sorry")
 
 
 print('\n')
